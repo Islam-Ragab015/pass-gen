@@ -38,7 +38,7 @@ This is a **Password Generator** app built using **Flutter** and **Riverpod**. I
 
 ## 🎨 App Preview
 
-![App Preview](assets/images/password_generator_preview.png)
+![App Preview](assets/images/password_generator_preview.png.jpg)
 
 ---
 
