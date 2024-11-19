@@ -14,6 +14,8 @@ final generatedPasswordProvider = StateProvider<String>((ref) => '');
 final passwordValidationMessageProvider = StateProvider<String>((ref) => '');
 
 class PasswordGeneratorScreen extends ConsumerWidget {
+  const PasswordGeneratorScreen({super.key});
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final passwordLength = ref.watch(passwordLengthProvider);
