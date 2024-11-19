@@ -21,7 +21,7 @@ class PasswordGeneratorApp extends StatelessWidget {
         primarySwatch: Colors.indigo,
         useMaterial3: true,
       ),
-      home: PasswordGeneratorScreen(),
+      home: const PasswordGeneratorScreen(),
     );
   }
 }
