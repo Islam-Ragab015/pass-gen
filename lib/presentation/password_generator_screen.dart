@@ -26,10 +26,12 @@ class PasswordGeneratorScreen extends ConsumerWidget {
     final generatedPassword = ref.watch(generatedPasswordProvider);
     final validationMessage = ref.watch(passwordValidationMessageProvider);
 
+    final screenWidth = MediaQuery.of(context).size.width;
+
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
-          padding: const EdgeInsets.all(16.0),
+          padding: EdgeInsets.all(screenWidth * 0.04), // Dynamic padding
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -39,19 +41,22 @@ class PasswordGeneratorScreen extends ConsumerWidget {
               ),
               const SizedBox(height: 15),
               // Password Length Input
-              TextField(
-                keyboardType: TextInputType.number,
-                decoration: const InputDecoration(
-                  labelText: 'Password Length',
-                  hintText: 'Enter length (e.g., 8)',
-                  border: OutlineInputBorder(),
-                  filled: true,
-                  fillColor: Colors.white,
+              SizedBox(
+                width: screenWidth * 0.9, // Width relative to screen size
+                child: TextField(
+                  keyboardType: TextInputType.number,
+                  decoration: const InputDecoration(
+                    labelText: 'Password Length',
+                    hintText: 'Enter length (e.g., 8)',
+                    border: OutlineInputBorder(),
+                    filled: true,
+                    fillColor: Colors.white,
+                  ),
+                  onChanged: (value) {
+                    ref.read(passwordLengthProvider.notifier).state =
+                        int.tryParse(value) ?? 8;
+                  },
                 ),
-                onChanged: (value) {
-                  ref.read(passwordLengthProvider.notifier).state =
-                      int.tryParse(value) ?? 8;
-                },
               ),
               const SizedBox(height: 10),
               // Character Options
@@ -130,9 +135,9 @@ class PasswordGeneratorScreen extends ConsumerWidget {
                           .state = validationMsg;
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.green, // Stylish button color
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 25, vertical: 15),
+                      backgroundColor: Colors.green,
+                      padding: EdgeInsets.symmetric(
+                          horizontal: screenWidth * 0.1, vertical: 15),
                       textStyle: const TextStyle(fontSize: 16),
                     ),
                     child: const Text(
@@ -156,9 +161,9 @@ class PasswordGeneratorScreen extends ConsumerWidget {
                           .state = '';
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.red, // Reset button color
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 25, vertical: 15),
+                      backgroundColor: Colors.red,
+                      padding: EdgeInsets.symmetric(
+                          horizontal: screenWidth * 0.1, vertical: 15),
                       textStyle: const TextStyle(fontSize: 16),
                     ),
                     child: const Text(
@@ -205,8 +210,8 @@ class PasswordGeneratorScreen extends ConsumerWidget {
                       style: ElevatedButton.styleFrom(
                         backgroundColor:
                             Colors.deepPurpleAccent, // Copy button color
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 25, vertical: 15),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: screenWidth * 0.1, vertical: 15),
                         textStyle: const TextStyle(fontSize: 16),
                       ),
                       child: const Text(
@@ -225,7 +230,6 @@ class PasswordGeneratorScreen extends ConsumerWidget {
   }
 
   // Helper method to build Checkboxes
-
   Widget _buildCheckbox({
     required WidgetRef ref,
     required String label,
